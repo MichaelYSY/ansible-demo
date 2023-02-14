@@ -1,0 +1,13 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: install nginx
+      yum: name=nginx
+      notify: restart nginx service
+    - name: start nginx
+      service: name=nginx enabled=yes state=started
+
+  handlers:
+    - name: restart nginx service
+      service: name=nginx  state=restarted
